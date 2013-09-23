@@ -1,0 +1,30 @@
+﻿public void Monitor<TCounter>(Func<bool> function) where TCounter:ICounter
+{	
+	using (var repository = CounterRepositoryConfigurator.New(cfg => cfg.Register<TCounter>())
+	{
+		var counter = repository.GetCounter<TCounter>("_default");
+		var watch = new Stopwatch();
+		
+		try
+		{	
+			watch.Start();
+			var successful = function();
+			successful ? counter.Requests_Succeeded.Increment() : counter.Requests_Failed.Increment();
+		}
+		catch (System.Exception ex)
+		{
+			counter.Requests_Failed.Increment();
+		}
+		finally
+		{
+			watch.Stop();
+			counter.Requests_Response_Time.Set(watch.Elapsed.Seconds);
+		}
+}
+
+public interface ICounter
+{
+	Counter Requests_Succeeded { get; set; }
+	Counter Requests_Failed { get; set; }
+	Counter Requests_Response_Time { get; set; }
+}

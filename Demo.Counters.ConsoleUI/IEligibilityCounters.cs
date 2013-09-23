@@ -4,6 +4,6 @@ namespace Demo.Counters.ConsoleUI
 {
     public interface IEligibilityCounters : IDisposable
     {
-        IEligibility_MedDataCounters MedDataCounters { get; }
+        IEligibility_MedDataCounters MedData { get; }
     }
 }

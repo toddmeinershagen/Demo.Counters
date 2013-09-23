@@ -18,14 +18,14 @@ namespace Demo.Counters.ConsoleUI
 
             if (nextNumber%2 == 0)
             {
-                _counters.MedDataCounters.Requests_Succeeded.Increment();
+                _counters.MedData.Requests_Succeeded.Increment();
             }
             else
             {
-                _counters.MedDataCounters.Requests_Failed.Increment();
+                _counters.MedData.Requests_Failed.Increment();
             }
 
-            _counters.MedDataCounters.Requests_Response_Time.Set(generator.Next(100));
+            _counters.MedData.Requests_Response_Time.Set(generator.Next(100));
         }
     }
 }
