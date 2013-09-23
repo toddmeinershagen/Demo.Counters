@@ -11,7 +11,8 @@ namespace Demo.Counters.ConsoleUI
 
             while(true)
             {
-                service.Execute();
+                //service.ExecuteWithDependencyInjection();
+                service.ExecuteWithFunctionalAspect();
                 Thread.Sleep(1000);
             }
         }
